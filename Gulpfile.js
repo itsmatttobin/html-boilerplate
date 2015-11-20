@@ -18,8 +18,16 @@ gulp.task('minify-css', function() {
 		.pipe(gulp.dest(''));
 });
 
+// Minify JS
+gulp.task('minify-js', function() {
+	return gulp.src('assets/js/main.js')
+		.pipe(uglify())
+		.pipe(rename('assets/js/main.min.js'))
+		.pipe(gulp.dest(''));
+});
 
 gulp.task('default', function() {
 	gulp.watch('assets/scss/*.scss', ['sass']);
 	gulp.watch('assets/css/style.css', ['minify-css']);
+	gulp.watch('assets/js/main.js', ['minify-js']);
 });
