@@ -27,8 +27,11 @@ gulp.task('minify-js', function() {
 		.pipe(gulp.dest(''));
 });
 
-gulp.task('default', function() {
+// Watch
+gulp.task('watch', function() {
 	gulp.watch('assets/scss/*.scss', ['sass']);
 	gulp.watch('assets/css/style.css', ['minify-css']);
 	gulp.watch('assets/js/main.js', ['minify-js']);
 });
+
+gulp.task('default', ['sass', 'minify-css', 'minify-js', 'watch']);
