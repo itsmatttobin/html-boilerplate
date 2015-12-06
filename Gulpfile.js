@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
+var uglify = require('gulp-uglify');
 
 // SASS
 gulp.task('sass', function() {
