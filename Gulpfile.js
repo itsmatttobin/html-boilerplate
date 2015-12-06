@@ -18,7 +18,15 @@ gulp.task('bower', function() {
 // jQuery
 gulp.task('jquery', ['bower'], function() {
 	gulp.src(config.bowerDir + '/jquery/dist/jquery.min.js')
-		.pipe(gulp.dest('./lib'));
+		.pipe(gulp.dest('./lib/js'));
+});
+
+// Font Awesome
+gulp.task('font-awesome', ['bower'], function() {
+	gulp.src(config.bowerDir + '/font-awesome/css/font-awesome.min.css')
+		.pipe(gulp.dest('./lib/css'));
+	gulp.src(config.bowerDir + '/font-awesome/fonts/**.*')
+		.pipe(gulp.dest('./lib/fonts'));
 });
 
 // SASS
@@ -51,4 +59,4 @@ gulp.task('watch', function() {
 	gulp.watch('assets/src/js/main.js', ['minify-js']);
 });
 
-gulp.task('default', ['bower', 'jquery', 'sass', 'minify-css', 'minify-js']);
+gulp.task('default', ['bower', 'jquery', 'font-awesome', 'sass', 'minify-css', 'minify-js']);
