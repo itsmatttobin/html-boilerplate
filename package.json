@@ -1,13 +1,6 @@
 {
   "name": "HTML-Boilerplate",
-  "version": "1.0.0",
-  "description": "HTML Boilerplate",
-  "main": "Gulpfile.js",
-  "repository": {
-    "type": "git",
-    "url": "https://matttobin@bitbucket.org/matttobin/html-boilerplate.git"
-  },
-  "author": "Matt Tobin",
+  "version": "2.0.0",
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-minify-css": "^1.2.1",
