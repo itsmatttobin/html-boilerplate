@@ -25,4 +25,4 @@ Download or clone the latest version. Run the following commands in the root dir
 
 And you're all set!
 
-Run `gulp watch` to watch files for changes in Sass, CSS and JavaScript files for compilation and minification.
+Run `gulp watch` to watch for changes in Sass, CSS and JavaScript files for compilation and minification.
