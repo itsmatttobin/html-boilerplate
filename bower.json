@@ -1,0 +1,9 @@
+{
+  "name": "HTML-Boilerplate",
+  "install" : {
+    "path": "lib"
+  },
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
