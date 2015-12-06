@@ -1,8 +1,25 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
-var rename = require('gulp-rename');
-var uglify = require('gulp-uglify');
+var gulp = require('gulp'),
+	bower = require('gulp-bower'),
+	sass = require('gulp-sass'),
+	minifyCss = require('gulp-minify-css'),
+	rename = require('gulp-rename'),
+	uglify = require('gulp-uglify');
+
+var config = {
+		bowerDir: 'bower_components'
+	};
+
+// Bower
+gulp.task('bower', function() {
+	return bower()
+		.pipe(gulp.dest(config.bowerDir));
+});
+
+// jQuery
+gulp.task('jquery', ['bower'], function() {
+	gulp.src(config.bowerDir + '/jquery/dist/jquery.min.js')
+		.pipe(gulp.dest('./lib'));
+});
 
 // SASS
 gulp.task('sass', function() {
@@ -34,4 +51,4 @@ gulp.task('watch', function() {
 	gulp.watch('assets/src/js/main.js', ['minify-js']);
 });
 
-gulp.task('default', ['sass', 'minify-css', 'minify-js', 'watch']);
+gulp.task('default', ['bower', 'jquery', 'sass', 'minify-css', 'minify-js']);
