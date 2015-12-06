@@ -9,11 +9,13 @@ var config = {
 		bowerDir: 'bower_components'
 	};
 
+
 // Bower
 gulp.task('bower', function() {
 	return bower()
 		.pipe(gulp.dest(config.bowerDir));
 });
+
 
 // jQuery
 gulp.task('jquery', ['bower'], function() {
@@ -21,13 +23,18 @@ gulp.task('jquery', ['bower'], function() {
 		.pipe(gulp.dest('./lib/js'));
 });
 
+
 // Font Awesome
-gulp.task('font-awesome', ['bower'], function() {
+gulp.task('font-awesome-css', ['bower'], function() {
 	return gulp.src(config.bowerDir + '/font-awesome/css/font-awesome.min.css')
 		.pipe(gulp.dest('./lib/css'));
-	gulp.src(config.bowerDir + '/font-awesome/fonts/**.*')
+});
+
+gulp.task('font-awesome-fonts', ['bower'], function() {
+	return gulp.src(config.bowerDir + '/font-awesome/fonts/**.*')
 		.pipe(gulp.dest('./lib/fonts'));
 });
+
 
 // SASS
 gulp.task('sass', function() {
@@ -35,6 +42,7 @@ gulp.task('sass', function() {
 		.pipe(sass().on('error', sass.logError))
 		.pipe(gulp.dest('assets/src/css'));
 });
+
 
 // Minify CSS
 gulp.task('minify-css', ['sass'], function() {
@@ -44,6 +52,7 @@ gulp.task('minify-css', ['sass'], function() {
 		.pipe(gulp.dest('assets/dist/css'));
 });
 
+
 // Minify JS
 gulp.task('minify-js', function() {
 	return gulp.src('assets/src/js/main.js')
@@ -52,6 +61,7 @@ gulp.task('minify-js', function() {
 		.pipe(gulp.dest('assets/dist/js'));
 });
 
+
 // Watch
 gulp.task('watch', function() {
 	gulp.watch('assets/src/scss/*.scss', ['sass']);
@@ -59,4 +69,5 @@ gulp.task('watch', function() {
 	gulp.watch('assets/src/js/main.js', ['minify-js']);
 });
 
-gulp.task('default', ['bower', 'jquery', 'font-awesome', 'sass', 'minify-css', 'minify-js']);
+
+gulp.task('default', ['bower', 'jquery', 'font-awesome-css', 'font-awesome-fonts', 'sass', 'minify-css', 'minify-js']);
