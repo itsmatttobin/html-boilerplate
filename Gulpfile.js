@@ -17,13 +17,13 @@ gulp.task('bower', function() {
 
 // jQuery
 gulp.task('jquery', ['bower'], function() {
-	gulp.src(config.bowerDir + '/jquery/dist/jquery.min.js')
+	return gulp.src(config.bowerDir + '/jquery/dist/jquery.min.js')
 		.pipe(gulp.dest('./lib/js'));
 });
 
 // Font Awesome
 gulp.task('font-awesome', ['bower'], function() {
-	gulp.src(config.bowerDir + '/font-awesome/css/font-awesome.min.css')
+	return gulp.src(config.bowerDir + '/font-awesome/css/font-awesome.min.css')
 		.pipe(gulp.dest('./lib/css'));
 	gulp.src(config.bowerDir + '/font-awesome/fonts/**.*')
 		.pipe(gulp.dest('./lib/fonts'));
@@ -31,13 +31,13 @@ gulp.task('font-awesome', ['bower'], function() {
 
 // SASS
 gulp.task('sass', function() {
-	gulp.src('assets/src/scss/*.scss')
+	return gulp.src('assets/src/scss/*.scss')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(gulp.dest('assets/src/css'));
 });
 
 // Minify CSS
-gulp.task('minify-css', function() {
+gulp.task('minify-css', ['sass'], function() {
 	return gulp.src('assets/src/css/style.css')
 		.pipe(minifyCss())
 		.pipe(rename('style.min.css'))
