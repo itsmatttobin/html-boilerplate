@@ -1,6 +1,4 @@
 .ds_store
 node_modules
-bower_components
-assets/dist
-assets/src/css
-lib
+assets/css/dist
+assets/js/dist

@@ -1,14 +1,12 @@
 #HTML Boilerplate
 
-A front end boilerplate for building websites and web apps. 
+A front end HTML boilerplate. 
 
 ##Features
 
 - Responsive grid - Based on Bootstrap 3's responsive grid
 - Reset and typographic styles
 - Sass - SCSS syntax
-- jQuery
-- Font Awesome
 
 ##Installation
 
@@ -16,13 +14,12 @@ A front end boilerplate for building websites and web apps.
 
 - Node.js
 - Gulp
-- Bower
 
 Download or clone the latest version. Run the following commands in the root directory:
 
 1. `npm install`
-2. `gulp`
+2. `gulp`*
 
 And you're all set!
 
-Run `gulp watch` to watch for changes in Sass, CSS and JavaScript files for compilation and minification.
+* 'gulp' watches for changes in Sass, CSS and JavaScript files for compilation and minification.

@@ -1,73 +1,49 @@
-var gulp = require('gulp'),
-	bower = require('gulp-bower'),
-	sass = require('gulp-sass'),
-	minifyCss = require('gulp-minify-css'),
-	rename = require('gulp-rename'),
-	uglify = require('gulp-uglify');
-
-var config = {
-		bowerDir: 'bower_components'
-	};
-
-
-// Bower
-gulp.task('bower', function() {
-	return bower()
-		.pipe(gulp.dest(config.bowerDir));
-});
-
-
-// jQuery
-gulp.task('jquery', ['bower'], function() {
-	return gulp.src(config.bowerDir + '/jquery/dist/jquery.min.js')
-		.pipe(gulp.dest('./lib/js'));
-});
-
-
-// Font Awesome
-gulp.task('font-awesome-css', ['bower'], function() {
-	return gulp.src(config.bowerDir + '/font-awesome/css/font-awesome.min.css')
-		.pipe(gulp.dest('./lib/css'));
-});
-
-gulp.task('font-awesome-fonts', ['bower'], function() {
-	return gulp.src(config.bowerDir + '/font-awesome/fonts/**.*')
-		.pipe(gulp.dest('./lib/fonts'));
-});
-
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var cleanCSS = require('gulp-clean-css');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
+var babel = require('gulp-babel');
 
 // SASS
 gulp.task('sass', function() {
-	return gulp.src('assets/src/scss/*.scss')
-		.pipe(sass().on('error', sass.logError))
-		.pipe(gulp.dest('assets/src/css'));
+  return gulp.src('assets/scss/style.scss')
+      .pipe(sass().on('error', sass.logError))
+      .pipe(gulp.dest('assets/css/src'));
 });
-
 
 // Minify CSS
-gulp.task('minify-css', ['sass'], function() {
-	return gulp.src('assets/src/css/style.css')
-		.pipe(minifyCss())
-		.pipe(rename('style.min.css'))
-		.pipe(gulp.dest('assets/dist/css'));
+gulp.task('minify-css', function() {
+  return gulp.src('assets/css/src/**/*.css')
+    .pipe(cleanCSS())
+    .pipe(rename(function(path) {
+        path.basename += '.min';
+    }))
+    .pipe(gulp.dest('assets/css/dist'));
 });
-
 
 // Minify JS
 gulp.task('minify-js', function() {
-	return gulp.src('assets/src/js/main.js')
-		.pipe(uglify())
-		.pipe(rename('main.min.js'))
-		.pipe(gulp.dest('assets/dist/js'));
+  return gulp.src('assets/js/src/**/*.js')
+    .pipe(babel({
+        presets: ['env']
+    }))
+    .pipe(uglify().on('error', swallowError))
+    .pipe(rename(function(path) {
+        path.basename += '.min';
+    }))
+    .pipe(gulp.dest('assets/js/dist'));
 });
 
+// Stop watch tasks from stopping on error
+function swallowError (error) {
+  console.log(error.toString());
+  this.emit('end');
+}
 
-// Watch
-gulp.task('watch', function() {
-	gulp.watch('assets/src/scss/*.scss', ['sass']);
-	gulp.watch('assets/src/css/style.css', ['minify-css']);
-	gulp.watch('assets/src/js/main.js', ['minify-js']);
+// Default task
+gulp.task('default', function() {
+  gulp.watch('assets/scss/**/*.scss', ['sass']);
+  gulp.watch('assets/css/src/**/*.css', ['minify-css']);
+  gulp.watch('assets/js/src/**/*.js', ['minify-js']);
 });
-
-
-gulp.task('default', ['bower', 'jquery', 'font-awesome-css', 'font-awesome-fonts', 'sass', 'minify-css', 'minify-js']);
