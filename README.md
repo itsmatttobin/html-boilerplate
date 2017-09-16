@@ -1,16 +1,16 @@
-#HTML Boilerplate
+# HTML Boilerplate
 
 A front end HTML boilerplate. 
 
-##Features
+## Features
 
 - Responsive grid - Based on Bootstrap 3's responsive grid
 - Reset and typographic styles
 - Sass - SCSS syntax
 
-##Installation
+## Installation
 
-####Requires:
+#### Requires:
 
 - Node.js
 - Gulp
